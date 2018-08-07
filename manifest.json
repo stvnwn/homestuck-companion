@@ -1,0 +1,32 @@
+{
+
+  "description": "Adds commentary, keyboard navigation and useful info to the pages of Homestuck.com stories.",
+  "manifest_version": 2,
+  "name": "Homestuck Companion",
+  "version": "0.2",
+  "homepage_url": "https://addons.mozilla.org/en-US/firefox/addon/homestuck-companion/",
+  "icons": {
+    "48": "icons/border-48.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://www.homestuck.com/problem-sleuth/*", "*://www.homestuck.com/story/*",
+      "*://www.homestuck.com/problem-sleuth", "*://www.homestuck.com/story"],
+      "js": ["hscompanion.js"]
+    }
+  ],
+
+  "options_ui": {
+    "page": "options.html"
+  },
+
+  "permissions": [
+  "*://recordcrash.com/*",
+  "webRequest",
+  "storage"
+  ]
+
+
+
+}
