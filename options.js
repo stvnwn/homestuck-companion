@@ -8,10 +8,12 @@ function saveOptions(e) {
 function restoreOptions() {
 
   function setCurrentChoice(result) {
-    if (result.hussiecomment === true || result.hussiecomment === false)
-      document.querySelector("#hussiecomment").checked = result.hussiecomment;
-    else
-      document.querySelector("#hussiecomment").checked = true;
+    if (result.hussiecomment === undefined) {
+      browser.storage.local.set({
+        hussiecomment: true,
+      });
+    }
+    document.querySelector("#hussiecomment").checked = result.hussiecomment;
   }
 
   function onError(error) {

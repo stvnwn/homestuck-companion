@@ -14,11 +14,15 @@ if (page === "story" || page === "problem-sleuth"){
 //console.log(adv + " " + page); //I use this for debugging, don't judge
 
 //Here we get the value from the options to see if comments should be loaded or not
-var hussiecomment = true;
+var hussiecomment = browser.storage.local.get("hussiecomment");
+hussiecomment.then( (result) => {
+  if (result.hussiecomment)
+    requestCommentary();
+});
 
 //Time to request the commentary from the API 
 
-if (hussiecomment){
+function requestCommentary() {
 	fetch('https://recordcrash.com:3141/' + adv + '/' + page)
 		.then(data => data.json())
 		.then(datajson => {

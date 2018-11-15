@@ -9,6 +9,10 @@
     "48": "icons/border-48.png"
   },
 
+  "background": {
+    "scripts": ["installation.js"]
+  },
+
   "content_scripts": [
     {
       "matches": ["*://www.homestuck.com/problem-sleuth/*", "*://www.homestuck.com/story/*",
