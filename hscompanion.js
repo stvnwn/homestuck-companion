@@ -78,6 +78,11 @@ function requestCommentary() {
 
 document.onkeydown = function(e) {
     switch (e.keyCode) {
+    	case 17:
+    		if(document.activeElement.id != "SBURBStage" && document.activeElement.type != "application/x-shockwave-flash") {
+            	document.getElementsByClassName("o_chat-log-btn")[0].click();
+        	}
+    		break;
         case 37:
         	//If you are not playing a walkaround, change page
         	if(document.activeElement.id != "SBURBStage" && document.activeElement.type != "application/x-shockwave-flash") {
