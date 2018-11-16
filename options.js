@@ -7,9 +7,9 @@ function saveOptions(e) {
 
 function restoreOptions() {
 
-  function setCurrentChoice(result) {
+  async function setCurrentChoice(result) {
     if (result.hussiecomment === undefined) {
-      browser.storage.local.set({
+      await browser.storage.local.set({
         hussiecomment: true,
       });
     }
