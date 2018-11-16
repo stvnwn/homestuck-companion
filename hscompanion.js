@@ -14,11 +14,15 @@ if (page === "story" || page === "problem-sleuth"){
 //console.log(adv + " " + page); //I use this for debugging, don't judge
 
 //Here we get the value from the options to see if comments should be loaded or not
-var hussiecomment = true;
+var hussiecomment = browser.storage.local.get("hussiecomment");
+hussiecomment.then(result => {
+  if (result.hussiecomment)
+    requestCommentary();
+});
 
 //Time to request the commentary from the API 
 
-if (hussiecomment){
+function requestCommentary() {
 	fetch('https://recordcrash.com:3141/' + adv + '/' + page)
 		.then(data => data.json())
 		.then(datajson => {
@@ -26,6 +30,7 @@ if (hussiecomment){
 				//We create the div we're going to embed in the page based on homestuck.com standards
 
 				var son = document.createElement("div");
+        son.id = "commentary";
 				son.className = "row bg-hs-gray bg-light-gray--md pad-b-md pad-b-lg--md pos-r";
 				var sonsson = document.createElement("div");
 				sonsson.className = "mar-x-auto disp-bl bg-hs-gray pad-t-lg";
@@ -46,6 +51,7 @@ if (hussiecomment){
 				//We create the div we're going to embed in the page based on homestuck.com standards
 
 				var son = document.createElement("div");
+        son.id = "notes";
 				son.className = "row bg-hs-gray bg-light-gray--md pad-b-md pad-b-lg--md pos-r";
 				var sonsson = document.createElement("div");
 				sonsson.className = "mar-x-auto disp-bl bg-hs-gray pad-t-lg";
@@ -85,3 +91,14 @@ document.onkeydown = function(e) {
             break;
     }
 };
+
+//Add or remove commentary on option change
+
+browser.storage.onChanged.addListener(change => {
+  if (change.hussiecomment.newValue)
+    requestCommentary();
+  else {
+    document.querySelector("#commentary").remove();
+    document.querySelector("#notes").remove();
+  }
+});
